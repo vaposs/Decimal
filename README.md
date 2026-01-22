@@ -1,86 +1,85 @@
-# s21_decimal 
+# s21_decimal
 
-Implementation of your own s21_decimal.h library.
+s21_decimal.h shaxsiy kutubxonasini amalga oshirish.
 
-💡 [Tap here](https://new.oprosso.net/p/4cb31ec3f47a4596bc758ea1861fb624) **to leave your feedback on the project**. It's anonymous and will help our team make your educational experience better. We recommend completing the survey immediately after the project.
+💡 **Ushbu loyiha haqida biz bilan fikr-mulohazalaringizni baham ko’rish uchun [bu yerni bosing](https://new.oprosso.net/p/4cb31ec3f47a4596bc758ea1861fb624)**. Bu anonim bo’lib, jamoamizga ta’limni yaxshilashga yordam beradi. Loyihani tugatgandan so'ng darhol so'rovnomani to'ldirishni tavsiya qilamiz.
 
 ## Contents
 
 1. [Chapter I](#chapter-i) \
-   1.1. [Introduction](#introduction)
+    1.1. [Introduction](#introduction)
 2. [Chapter II](#chapter-ii) \
-   2.1. [Information](#information)
+    2.1. [Information](#information)
 3. [Chapter III](#chapter-iii) \
-   3.1. [Part 1](#part-1-implementation-of-the-decimalh-library-functions)
+    3.1. [Part 1](#part-1-реализация-функции-библиотеки-matrixh)  
 
-
-## Chapter I
+**Chapter I**
 
 ![s21_decimal](misc/images/s21_decimal.png)
 
-Planet Earth, 1990s. 
+Yer sayyorasi, 90-yillar.
 
-The world economy is growing exponentially, the stock market is growing year by year, more and more companies are going public and their shares are listed. The number of users, the number of transactions, the price, the commission, the interest, the calculation of technical financial indicators... It's hard to overestimate the accuracy of all this data, and there are serious problems with the current outdated data types used in the financial sector.
+Jahon iqtisodiyoti jadal sur'atlar bilan o'sib bormoqda, birja yildan-yilga qayta-qayta ko'payib bormoqda, tobora ko'proq kompaniyalar IPOga chiqmoqda va ularning aksiyalari kotirovka qilina boshlanmoqda. Foydalanuvchilar soni, tranzaksiyalar soni, narx, komissiyalar, foizlar, moliyaviy texnik ko'rsatkichlarni hisoblash... Bu barcha ma'lumotlarning aniqligi muhimligiga ortiqcha baho berish qiyin, moliyaviy sektorda qo'llaniladigan hozirgi eskirgan ma'lumotlar turlari tufayli esa jiddiy muammolar yuzaga keladi.
 
-Millions of dollars are lost every year due to a miscalculation in the IEEE 754 (float) standard that simply disappears from the system. 
+Odatiy IEEE 754 (float) dagi hisob-kitob xatolari tufayli yiliga millionlab dollar yo'qotiladi, ular tizimdan shunchaki so'rilib, abadiy yo'qoladi.
 
-In addition to the FIX (Financial Information eXchange) protocol, which is being developed to handle data between the broker and the exchange, another tool is needed to transfer and store data.
+Broker va birja o'rtasida uzatish paytida ma'lumotlarni qayta ishlash uchun foydalaniladigan FIX (Financial Information eXchange) ishlab chiqiluvchi protokoli bilan birgalikda ma'lumotlarni uzatish va saqlash uchun yana bir instrument kerak bo'ladi.
 
-At the follow-up meeting:
+Keyingi yig’ilishda:
 
-*"So, gentlemen, please note that our group of specialists, who have already proven themselves in many successful projects, have been commissioned by the government to develop a completely new type of data, code-named Decimal. Its purpose is to make it possible to significantly reduce, and in some cases eliminate, errors in the world's financial transactions for several decades. It is required to describe all the necessary logical and arithmetic operations that would allow the necessary calculations to be performed quickly and conveniently."*
+*— Shunday qilib, janoblar, eʼtibor qaratishingizni soʻrayman: koʻplab muvaffaqiyatli loyihalarda oʻzini koʻrsatgan bizning mutaxassislar guruhiga hukumat tomonidan kodli nom – Decimal – mutlaqo yangi maʼlumotlar turini ishlab chiqish vazifasi qoʻyilgan. Uning maqsadi bir necha o'n yillar davomida global moliyaviy operatsiyalarda xatoliklarni sezilarli darajada kamaytirish va ba'zi hollarda uni butunlay yo'q qilishdir. Kerakli hisob-kitoblarni tez va qulay bajarishga imkon beradigan barcha zarur mantiqiy va arifmetik operatsiyalarni tavsiflash kerak bo’ladi.*
 
-*"Wow, that's quite an order we got, and from such a customer! We have to keep this client — it promises us big contracts in the future if we do well!"*
+*– Buni qarang-a, yaxshi buyurtma tushibdi, yana shunday mijozdan-a! Biz bu mijozni saqlab qolishimiz kerak, agar biz buni qila olsak, bu bizga kelajakda katta shartnomalar va'da qiladi!*
 
-*"Yes, you're right, that's why we need to think about what features to implement... Any suggestions?"*
+*– Ha, to'g'ri aytdingiz, shuning uchun biz qanday funksiyalarni amalga oshirishimiz kerakligini darhol tushunishimiz kerak... Takliflar?*
 
-*"Sum and difference..."*
+*– Yig'indi va ayirma...*
 
-*"Multiplication and division..."*
+*– Ko'paytirish va bo'lish ...*
 
-*"Agreed, but we need more!"*
+*– Fikringizga qo’shilaman, lekin bizga yanada ko'proq kerak!*
 
-*"Take the remainder, comparison and conversion operations!"*
+*— Qoldiq olish, taqqoslash va konvertatsiya operatsiyalari!*
 
-*"Mathematical rounding in all directions!"*
+*— Barcha yo'nalishlarda matematik yaxlitlash!*
 
-*"Yes, I think that's enough, let's get to work! We only have a few days left, don't let us down!"*
+*– Ha, menimcha, ro'yxat juda mos keladi, qani, ishga kirishamiz! Bizda bularning barini bajarish uchun ikki kunimiz bor, undan ko’p emas, shuning uchun, pand bermanglar!*
 
 ## Introduction
 
-In this project you will implement the library s21_decimal.h in the programming language C. The purpose of this library is to add the ability to work with the "decimal" type, which is not in the language standard. However, this type is very important. For example, for financial calculations, where calculation errors characteristic of floating-point types are unacceptable. As part of the project, you will work with the tasks of processing financial information, dive into the issues of internal representation of different types of data, and solidify your knowledge of structured programming.
+Ushbu loyihada siz C dasturlash tilida s21_decimal.h kutubxonasini amalga oshirishingiz kerak. Ushbu kutubxona til standartida bo'lmagan "decimal" turi bilan ishlash imkoniyatini qo'shishi kerak. Biroq, bu tur, masalan, suzuvchi nuqtali turlarga xos bo'lgan hisoblash xatolari qabul qilinishi mumkin bo'lmagan moliyaviy hisoblar uchun juda muhimdir. Ushbu loyiha doirasida siz moliyaviy ma'lumotlarni qayta ishlash masalalari bilan tanishasiz, har xil turdagi ma'lumotlarning ichki ko'rinishi masalalariga sho'ng'ib, tuzilmaviy yondashuvni mustahkamlaysiz.
 
 ## Chapter II
 
 ## Information
 
-The Decimal value type represents decimal numbers from positive 79,228,162,514,264,337,593,543,950,335 to negative 79,228,162,514,264,337,593,543,950,335. The default value of a Decimal is 0. The Decimal value type is suitable for financial calculations that require a large number of significant integral and fractional digits and that do not have rounding errors. The Decimal type does not eliminate the need for rounding. Rather, it minimizes rounding errors.
+Decimal turi musbat 79,228,162,514,264,337,593,543,950,335 dan manfiy 79,228,162,514,264,337,593,543,950,335 gacha bo'lgan o'nli sonlarni ifodalaydi. Decimal qiymati asl sozlamalar bo’yicha 0 ga teng. Decimal koʻp sonli muhim butun va kasr sonlarni talab qiladigan va yaxlitlash xatosi boʻlmagan moliyaviy hisoblar uchun mos keladi. Ushbu tur yaxlitlash zaruratini bartaraf etmaydi. Aksincha, u tufayli yuzaga keladigan xatolar sonini minimallashtiradi.
 
-When the result of the division and multiplication is passed to the Round method, the result suffers no loss of precision.
+Bo'lish va ko'paytirish natijasi yaxlitlash usuliga o'tkazilganda, natija aniqlikni yo'qotishdan ziyon ko’rmaydi.
 
-A Decimal number is a floating point value that consists of a sign, a numerical value where each digit in the value ranges from 0 to 9, and a scaling factor that indicates the position of a floating decimal point that separates the integral and fractional parts of the numerical value.
+Decimal son – bu belgidan, har bir raqam 0 dan 9 gacha bo'lgan sonli qiymatdan va son qiymatning butun va kasr qismlarini ajratib turuvchi o’nli nuqta o'rnini belgilovchi masshtablash koeffitsientidan iborat suzuvchi nuqtali qiymatdir.
 
-The binary representation of a Decimal value consists of a 1-bit sign, a 96-bit integer, and a scaling factor that is used to divide the 96-bit integer and specify what portion of it is a Decimal fraction. The scaling factor is implicitly the number 10 raised to an exponent between 0 and 28. Therefore, the binary representation of a Decimal value has the form ((-2^96 to 2^96) / 10^(0 to 28)), where -(2^96-1) is equal to MinValue and 2^96-1 is equal to MaxValue.
+Decimalning ikkilik ko'rinishi 1-razryadli belgi, 96-razryadli butun son va 96-razryadli butun sonni bo'lish uchun ishlatiladigan masshtablash koeffitsientidan iborat bo'lib, uning qancha qismi o'nli kasr ekanligini ko'rsatadi. Masshtablash koeffitsienti 0 dan 28 gacha bo'lgan oraliqdagi darajaga ko'tarilgan 10 raqamiga bevosita tengdir. Demak, Decimal ning ikkilik ko'rinishi ((-2^96 dan 2^96 gacha) / 10^(0 dan 28 gacha)) ko’rinishiga ega, bunda -(2^96-1) minimal qiymatga, 2^96-1 esa maksimal qiymatga teng.
 
-The scaling factor can also preserve any trailing zeros in a Decimal number. Trailing zeros do not affect the value of a Decimal number in arithmetic or comparison operations. 
+Masshtablash koeffitsienti, shuningdek, Decimaldagi har qanday oxirgi nollarni saqlab qolishi mumkin. Ushbu oxirgi nollar arifmetik yoki taqqoslash operatsiyalaridagi qiymatga ta'sir qilmvaydi.
 
-### Binary representation
+### Ikkilik ko’rinish
 
-The binary representation of a Decimal number consists of a 1-bit sign, a 96-bit integer number, and a scaling factor that is used to divide the integer number and specify what portion of it is a decimal fraction. The scaling factor is implicitly the number 10 raised to an exponent between 0 and 28.
+Decimalning ikkilik ko'rinishi 1-razryadli belgi, 96-razryadli butun son va butun sonni bo'lish uchun ishlatiladigan masshtablash koeffitsientidan iborat bo'lib, uning qancha qismi o'nli kasr ekanligini ko'rsatadi. Masshtablash koeffitsienti 0 dan 28 gacha bo'lgan oraliqdagi darajaga ko'tarilgan 10 raqamiga bevosita tengdir. 
 
-The Decimal number can be implemented as a four-element array of 32-bit signed integers (`int bits[4];`).
+Decimal soni 32-razryadli belgili butun sonlardan iborat to'rt elementli massiv ko’rinishida amalga oshirilishi mumkin (int bits[4] ;).
 
-`bits[0]`, `bits[1]`, and `bits[2]` contain the low, middle, and high 32 bits of the 96-bit integer, respectively.
+`bits[0]` `bits[1]` va `bits[2]` mos ravishda 96-razryadli butun sonning eng kichik, o'rta va yuqori 32 bitlarini o'z ichiga oladi.
 
-`bits[3]` contains the scaling factor and sign and consists of the following parts:
-- Bits 0 through 15, the lower word, are unused and must be zero.
-- Bits 16 to 23 must contain an exponent between 0 and 28, indicating the power of 10 to divide the integer.
-- Bits 24 through 30 are unused and must be zero.
-- Bit 31 contains the sign; 0 is positive and 1 is negative.
+`bits[3]` masshtablash koeffitsienti va belgisini o'z ichiga oladi va quyidagi qismlardan iborat:
+- 0 dan 15 gacha bitlar, eng kichik so'z, ishlatilmaydi va nolga teng bo’lishi kerak.
+- 16 dan 23 gacha bo'lgan bitlar butun sonni bo'lish uchun 10 darajani ko’rsatuvchi 0 dan 28 gacha darajadagi ko'rsatkichni o'z ichiga olishi kerak.
+- 24 dan 30 gacha bo'lgan bitlar ishlatilmaydi va ular nolga teng bo'lishi kerak.
+- Bit 31 belgini o'z ichiga oladi; 0 musbat va 1 manfiy ma'noni anglatadi.
 
-Note that the bit representation distinguishes between negative and positive zeros. These values can be treated as equal in all operations.
+E'tibor bering, bitli ko'rinish manfiy va musbat nollarni ajratib turadi. Ushbu qiymatlar barcha operatsiyalarda ekvivalent deb hisoblanishi mumkin.
 
-### Example:
+### Misol:
 
 ```c
 typedef struct 
@@ -89,91 +88,92 @@ typedef struct
 } s21_decimal;
 ```
 
-### Arithmetic Operators
+Arifmetik operatorlar
 
-| Operator name | Operators  | Function                                                                           | 
+
+| Operator nomi | Operator  | Funksiya                                                                            | 
 | ------ | ------ |------------------------------------------------------------------------------------|
-| Addition | + | int s21_add(s21_decimal value_1, s21_decimal value_2, s21_decimal *result)         |
-| Subtraction | - | int s21_sub(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) |
-| Multiplication | * | int s21_mul(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) | 
-| Division | / | int s21_div(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) |
+| Qo'shish | + | int s21_add(s21_decimal value_1, s21_decimal value_2, s21_decimal *result)         |
+| Ayirish | - | int s21_sub(s21_decimal value_1, s21_decimal value_2, s21_decimal *result)         |
+| Ko'paytirish | * | int s21_mul(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) | 
+| Bo'lish | / | int s21_div(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) |
 
-The functions return the error code:
-- 0 — OK;
-- 1 — the number is too large or equal to infinity;
-- 2 — the number is too small or equal to negative infinity;
-- 3 — division by 0.
+Funksiyalar xatolik kodini qaytaradi:
+- 0 – OK;
+- 1 — son juda katta yoki cheksizlikka teng;
+- 2 – son juda kichik yoki manfiy cheksizlikka teng;
+- 3 – 0 ga bo'linish.
 
-*Note on the numbers that do not fit into the mantissa:*
-- *When getting numbers that do not fit into the mantissa during arithmetic operations, use bank rounding (for example, 79,228,162,514,264,337,593,543,950,335 — 0.6 = 79,228,162,514,264,337,593,543,950,334)*
+*Mantissaga to'g'ri kelmaydigan raqamlar haqida tafsilot:*
+- *Arifmetik amallarni bajarishda mantissaga to‘g‘ri kelmaydigan raqamlarni olishda bank yaxlitlanishidan foydalaning (masalan, 79,228,162,514,264,337,593,543,950,335 — 0.6 = 79,228,162,514,264,337,593,543,950,334)*.
 
-### Comparison Operators
+### Taqqoslash operatorlari
 
-| Operator name | Operators  | Function | 
+| Operator nomi | Operator  | Funksiya | 
 | ------ | ------ | ------ |
-| Less than | < | int s21_is_less(s21_decimal, s21_decimal) |
-| Less than or equal to | <= | int s21_is_less_or_equal(s21_decimal, s21_decimal) | 
-| Greater than | > |  int s21_is_greater(s21_decimal, s21_decimal) |
-| Greater than or equal to | >= | int s21_is_greater_or_equal(s21_decimal, s21_decimal) | 
-| Equal to | == |  int s21_is_equal(s21_decimal, s21_decimal) |
-| Not equal to | != |  int s21_is_not_equal(s21_decimal, s21_decimal) |
+| Kichik  | < | int s21_is_less(s21_decimal, s21_decimal) |
+| Kichik yoki teng | <= | int s21_is_less_or_equal(s21_decimal, s21_decimal) | 
+| Katta | \> |  int s21_is_greater(s21_decimal, s21_decimal) |
+| atta yoki teng | \>= | int s21_is_greater_or_equal(s21_decimal, s21_decimal) | 
+| Teng | == |  int s21_is_equal(s21_decimal, s21_decimal) |
+| Teng emas | != |  int s21_is_not_equal(s21_decimal, s21_decimal) |
 
-Return value:
-- 0 — FALSE;
-- 1 — TRUE.
+Qaytish qiymati:
+-	0 – FALSE;
+-	1 — TRUE.
 
-### Convertors and parsers
+### *O’zgartirgichlar
 
-| Convertor/parser | Function | 
+| O’zgartirgich | Funksiya | 
 | ------ | ------ |
-| From int  | int s21_from_int_to_decimal(int src, s21_decimal *dst) |
-| From float  | int s21_from_float_to_decimal(float src, s21_decimal *dst) |
-| To int  | int s21_from_decimal_to_int(s21_decimal src, int *dst) |
-| To float  | int s21_from_decimal_to_float(s21_decimal src, float *dst) |
+| int dan | int s21_from_int_to_decimal(int src, s21_decimal *dst) |
+| float dan | int s21_from_float_to_decimal(float src, s21_decimal *dst) |
+| int ga | int s21_from_decimal_to_int(s21_decimal src, int *dst) |
+| float ga | int s21_from_decimal_to_float(s21_decimal src, float *dst) |
 
-Return value — code error:
-- 0 — OK;
-- 1 — convertation error.
+Qaytish qiymati – xatolik kodi:
+- 0 – OK;
+- 1 — konvertatsiya xatosi.
 
-*Note on the conversion of a float type number:*
-- *If the numbers are too small (0 < |x| < 1e-28), return an error and value equal to 0*.
-- *If the numbers are too large (|x| > 79,228,162,514,264,337,593,543,950,335) or are equal to infinity, return an error*.
-- *When processing a number with the float type, convert all the significant decimal digits contained in it. If there are more than 7 such digits, the number is rounded to the closest one that does not have more than 7 significant decimal digits.*
+*float turi raqamini o’zgartirish bo’yicha tafsilot:*
+- *Agar raqamlar juda kichik bo'lsa (0 < /x/ < 1e-28), xatolikni va 0 qiymatini qaytaring.*
+- *Agar raqamlar juda katta bo'lsa (/x/ > 79,228,162,514,264,337,593,543,950,335) yoki cheksizlikka teng bo'lsa, xatolikni qaytaring.*
+- *float turi bilan raqamni qayta ishlashda undagi barcha muhim o'nlik raqamlarni o’zgartiring. Agar bunday raqamlar 7 dan ortiq bo'lsa, raqamning qiymati 7 dan ko'p bo'lmagan muhim raqamga ega bo'lgan eng yaqin raqamga yaxlitlanishi kerak.*
 
-*Note on the conversion from decimal type to int:*
-- *If there is a fractional part in a decimal number, it should be discarded (for example, 0.9 is converted to 0)*.
+*decimal turidagi sondan int turiga o’zgartirish haqida tafsilot:*
+- *Agar decimal turidagi sonda kasr qism mavjud bo'lsa, u holda uni tashlab yuborish lozim (masalan, 0,9 0 ga o’zgartiriladi).* 
 
+## Boshqa funksiyalar
 
-### Other functions
+| Tavsif | Funksiya                                                  | 
+| ------ |----------------------------------------------------------|
+| Ko’rsatilgan Decimal sonini manfiy cheksizlik tomon eng yaqin butun songacha yaxlitlaydi. | int s21_floor(s21_decimal value, s21_decimal *result)    |	
+| Decimalni eng yaqin butun songacha yaxlitlaydi. | int s21_round(s21_decimal value, s21_decimal *result)    |
+| Ko’rsatilgan Decimal sonning butun sonlarini qaytaradi; har qanday kasr raqamlari, shu jumladan oxiridagi nollar o'chiriladi. | int s21_truncate(s21_decimal value, s21_decimal *result) |
+| Ko’rsatilgan Decimalni -1 ga ko'paytirish natijasini qaytaradi. | int s21_negate(s21_decimal value, s21_decimal *result)   |
 
-| Description | Function                                                         | 
-| ------ |------------------------------------------------------------------|
-| Rounds a specified Decimal number to the closest integer toward negative infinity. | int s21_floor(s21_decimal value, s21_decimal *result)            |	
-| Rounds a decimal value to the nearest integer. | int s21_round(s21_decimal value, s21_decimal *result)    |
-| Returns the integral digits of the specified Decimal; any fractional digits are discarded, including trailing zeroes. | int s21_truncate(s21_decimal value, s21_decimal *result) |
-| Returns the result of multiplying the specified Decimal value by negative one. | int s21_negate(s21_decimal value, s21_decimal *result)   |
-
-Return value — code error:
-- 0 — OK;
-- 1 — calculation error.
+Qaytish qiymati – xatolik kodi:
+- 0 – OK;
+- 1 — hisoblash xatosi.
 
 ## Chapter III
 
-## Part 1. Implementation of the decimal.h library functions
+## Part 1. decimal.h kutubxonasi funksiyasini amalga oshirish
 
-The functions of the decimal.h library described [above](#information) must be implemented:
-- The library must be developed in C language of C11 standard using gcc compiler.
-- The library code must be located in the src folder on the develop branch.
-- Do not use outdated and legacy language constructions and library functions. Pay attention to the legacy and obsolete marks in the official documentation on the language and the libraries used. Use the POSIX.1-2017 standard.
-- When writing code it is necessary to follow the Google style for C++ ([link](https://google.github.io/styleguide/cppguide.html)).
-- Make it as a static library named *s21_decimal.a* (with the s21_decimal.h header file).
-- The library must be developed according to the principles of structured programming.
-- Use prefix s21_ before each function.
-- Prepare full coverage of library functions code with unit-tests using the Check library.
-- Unit tests must cover at least 80% of each function (checked using gcov).
-- Provide a Makefile for building the library and tests (with targets all, clean, test, s21_decimal.a, gcov_report).
-- The gcov_report target should generate a gcov report in the form of an html page. Unit tests must be run with gcov flags to do this.
-- When implementing decimal, stick to [the binary representation](#binary-representation) with the integer `bits` array as specified in the [example above](#example). Observe the position of the digits of a number in the `bits` array;
-- It is forbidden to use the __int128 type.
-- Trailing zeros can be as preserved as deleted (except for the `s21_truncate` function).
-- The defined type must support numbers from -79,228,162,514,264,337,593,543,950,335 to +79,228,162,514,264,337,593,543,950,335.
+Yuqorida tavsiflangan kutubxona funksiyalarini amalga oshirishingiz kerak:
+
+- Kutubxona gcc kompilyatoridan foydalangan holda C11 standartidagi C tilida ishlab chiqilishi kerak.
+- Kutubxona kodi develop tarmog’idagi src papkasida joylashgan bo'lishi kerak.
+- Eskirgan yoki iste’moldan chiqarilgan til konstruksiyalari va kutubxona funksiyalaridan foydalanmang. Til va ishlatiluvchi kutubxonalar bo’yicha rasmiy hujjatlardagi legacy va obsolete belgilariga e'tibor bering. POSIX.1-2017 standartiga qarab mo’ljal oling.
+- Kod yozishda C++ uchun Google Style ((havola)[(https://google.github.io/styleguide/cppguide.html)]) ga amal qiling.
+- Yechimni s21_decimal.a nomli statik kutubxona sifatida loyihalashtiring (s21_decimal.h sarlavha fayli bilan).
+- Kutubxona tuzilmaviy dasturlash tamoyillari asosida ishlab chiqilishi kerak.
+- Har bir funksiyadan oldin s21_ prefiksidan foydalaning.
+- Check kutubxonasidan foydalanib, kutubxona funksiyalarining to'liq unit testlar bilan qoplamasini tayyorlang.
+- Unit testlar har bir funksiyaning kamida 80% ini qamrab olishi kerak.
+- Kutubxona va testlarni yig’ish uchun Makefile ni nazarda tuting (all, clean, test, s21_decimal.a, gcov_report maqsadlari bilan).
+- gcov_report maqsadida html sahifasi shaklida gcov hisoboti shakllantirilishi kerak. Buning uchun unit testlar gcov bayroqlari bilan ishga tushirilishi kerak.
+- decimalni amalga oshirayotganda, yuqoridagi misolda ko'rsatilganidek, bits butun sonli massiviga ega bo’lgan ikkilik ko’rinishga qarab mo’ljal oling. bits massividagi son razryadlarining o'rnini kuzating.
+- _int128 turidan foydalanish taqiqlanadi.
+- Keyingi nollarni qoldirish yoki olib tashlash mumkin (s21_truncate funksiyasidan tashqari).
+- Aniqlanuvchi tur -79,228,162,514,264,337,593,543,950,335 dan +79,228,162,514,264,337,593,543,950,335 gacha raqamlarni qo'llab-quvvatlashi kerak.
